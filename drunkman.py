@@ -7,8 +7,8 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 n = 10000  # Number of runs
 fp = 1 / 3  # step toward fall probability
-pos = 2  # initial position (1 is in 1 step from fall)
-max_steps = 100000  # Almost infinity
+pos = 2  # initial position (1 is in 1 step to fall)
+max_steps = 1000  # Almost infinity
 
 faults = 0
 for attempts in range(1, n+1):
@@ -16,7 +16,7 @@ for attempts in range(1, n+1):
     cur_pos = pos
     while cur_pos > 0 and steps < max_steps:
         steps += 1
-        if random.SystemRandom().random() < fp:
+        if random.SystemRandom(attempts).random() < fp:
             cur_pos -= 1
         else:
             cur_pos += 1
